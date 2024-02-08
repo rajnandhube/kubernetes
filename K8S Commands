@@ -1,1 +1,116 @@
+K8S Cheatsheet: https://kubernetes.io/docs/reference/kubectl/quick-reference/
+
+#Find short names for Kubernetes resources in kubectl
+kubectl api-resources
+
+#Namespaces
+
+#Create a new namespace
+kubectl create namespace <name>
+
+#List all namespaces in the current cluster
+kubectl get namespaces
+
+#Set the default namespace for the current context.
+kubectl config set-context --current --namespace=<namespace>
+
+
+
+
+
+
+
+#Resource Quotas
+
+#Get Resource Quotas: Use the following command to retrieve the resource quotas in a specific namespace:
+kubectl get resourcequota -n <namespace> 
+
+#Describe Resource Quota: To get detailed information about a specific resource quota
+kubectl describe resourcequota <resourcequota-name> -n <namespace>
+
+#Create Resource Quota: To create a resource quota
+kubectl create -f resourcequota.yaml -n <namespace>
+
+#Update Resource Quota: If you need to modify an existing resource quota
+kubectl edit resourcequota <resourcequota-name> -n <namespace>
+
+#Delete Resource Quota:
+kubectl delete resourcequota <resourcequota-name> -n <namespace>
+
+
+
+
+
+
+
+#Deployments
+
+#Create a new deployment.
+kubectl create deployment <name> --image=<image_name>
+
+#List all deployments in the current cluster
+kubectl get deployments
+
+#Scale a deployment to the specified number of replicas.
+kubectl scale deployment <name> --replicas=<count>
+
+#Update the container image of a deployment.
+kubectl set image deployment/<name> <container_name>=<new_image>
+
+#Check the status of a rollout
+kubectl rollout status deployment/<name>
+
+#View the history of a deployment rollout.
+kubectl rollout history deployment/<name>
+
+#Rollback to the previous deployment version.
+kubectl rollout undo deployment/<name>
+
+
+
+
+
+
+#pods
+
+
+#List all pods in the current namespace
+kubectl get pods -n <namespace>
+
+
+
+
+#Services
+
+#Create a new service: Exposes an application running on a set of pods as a network service.
+kubectl expose deployment <name> --port=<port> --target-port=<target_port> --type=<type>
+
+#List all services
+kubectl get services
+
+#Delete a service.
+kubectl delete service <name>
+
+
+
+
+#Ingress
+
+
+#Create an ingress resource: Exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
+kubectl apply -f <ingress_yaml_file>
+
+#List all ingress resources
+kubectl get ingress
+
+
+
+#Configurations
+
+#Create a ConfigMap
+kubectl create configmap <configmap-name> --from-file=<path-to-file>
+
+#List all ConfigMaps
+kubectl get configmaps
+
 
